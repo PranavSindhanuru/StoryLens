@@ -80,20 +80,18 @@ function App() {
 							.split(/(\s+)/)
 							.filter(Boolean)
 							.map((word, index) => (
-								wordMeaning[word.toLowerCase()] ?
+								wordMeaning[word.toLowerCase().replace(/[.,!?]/g, '')] ?
 									<Popover
 										trigger="hover"
 										content={
 											<div className='font-tahoma w-[calc(100vw-20px)] md:min-w-[300px] md:max-w-[600px] md:w-fit h-fit max-h-[40vh] overflow-y-auto overflow-x-hidden scrollbar p-5 shadow-md'>
-												{wordMeaning[word.toLowerCase()]}
+												{wordMeaning[word.toLowerCase().replace(/[.,!?]/g, '')]}
 											</div>
 										}
 									>
 										<span
 											className='font-bold cursor-pointer relative'
 											key={index}
-										// onMouseEnter={() => onHoverSetSelectedWord(word.trim())}
-										// data-popover-target={wordMeaning[word.toLowerCase()] ? 'popover' : ''}
 										>
 											{word}
 										</span>
