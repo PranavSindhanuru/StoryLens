@@ -7,7 +7,6 @@ import React from 'react';
 function App() {
 
 	const [data, setData] = useState<any>({});
-	const [mainData, setMainData] = useState<any>([]);
 	const [storiesData, setStoriesData] = useState<any>([]);
 	const [wordMeaning, setWordMeaning] = useState<any>({});
 	const [selectedStory, setSelectedStory] = useState<any>(null);
@@ -26,18 +25,15 @@ function App() {
 
 	useEffect(() => {
 		if (Object.keys(data).length > 0) {
-			let temp: any = []
 			let tempwordMeaning: any = {}
 			data?.Main?.map((item: any) => {
 				if (item?.ID) {
-					temp.push(item)
 					tempwordMeaning[item.Word.toLowerCase()] = item.Meaning
 				}
 			})
 			setWordMeaning(tempwordMeaning)
-			setMainData(temp)
-
-			temp = []
+			
+			let temp: any = []
 			data?.Stories?.map((item: any) => {
 				temp.push(item)
 			})
