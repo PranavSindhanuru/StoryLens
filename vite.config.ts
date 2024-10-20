@@ -9,4 +9,6 @@ export default defineConfig({
       plugins: [tailwindcss()],
     },
   },
+  plugins: [react()],
+  base: "/StoryLens/",
 });
