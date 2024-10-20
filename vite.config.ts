@@ -4,11 +4,11 @@ import tailwindcss from "tailwindcss";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/StoryLens/",
   css: {
     postcss: {
       plugins: [tailwindcss()],
     },
   },
   plugins: [react()],
-  base: "/StoryLens/",
 });
