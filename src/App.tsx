@@ -32,7 +32,7 @@ function App() {
 				}
 			})
 			setWordMeaning(tempwordMeaning)
-			
+
 			let temp: any = []
 			data?.Stories?.map((item: any) => {
 				temp.push(item)
@@ -42,7 +42,7 @@ function App() {
 	}, [data]);
 
 	const loadExcelFile = async () => {
-		const response = await fetch('/Words Master.xlsx');
+		const response = await fetch(`${import.meta.env.BASE_URL}/Words Master.xlsx`);
 		const blob = await response.blob();
 		const reader = new FileReader();
 		reader.onload = (e: any) => {
@@ -70,8 +70,6 @@ function App() {
 		});
 	};
 
-	console.log(window.innerWidth, window.innerHeight);
-
 	const CustomText = ({ children }: any) => {
 		return (
 			<span>
@@ -86,7 +84,7 @@ function App() {
 									<Popover
 										trigger="hover"
 										content={
-											<div className='font-tahoma w-[calc(100vw-20px)] h-fit max-h-[40vh] overflow-y-auto overflow-x-hidden scrollbar p-5 shadow-md'>
+											<div className='font-tahoma w-[calc(100vw-20px)] md:min-w-[300px] md:max-w-[600px] md:w-fit h-fit max-h-[40vh] overflow-y-auto overflow-x-hidden scrollbar p-5 shadow-md'>
 												{wordMeaning[word.toLowerCase()]}
 											</div>
 										}
@@ -120,7 +118,7 @@ function App() {
 							<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 						</svg>
 						<div className="w-full flex items-center justify-center">
-							<img src="/logo.svg" alt="" className="w-6 h-6 mx-3" />
+							<img src={`${import.meta.env.BASE_URL}/logo.svg`} alt="" className="w-6 h-6 mx-3" />
 							<div className="font-semibold">StoryLens</div>
 						</div>
 					</div>
@@ -147,7 +145,7 @@ function App() {
 							<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 						</svg>
 						<div className="w-full flex items-center justify-start ml-10">
-							<img src="/logo.svg" alt="" className="w-6 h-6 mx-3" />
+							<img src={`${import.meta.env.BASE_URL}/logo.svg`} alt="" className="w-6 h-6 mx-3" />
 							<div className="font-semibold">StoryLens</div>
 						</div>
 					</div>
