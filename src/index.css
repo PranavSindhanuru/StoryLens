@@ -12,11 +12,11 @@
 
     .scrollbar::-webkit-scrollbar-track {
         border-radius: 100vh;
-        background: #ffffff;
+        background: transparent;
     }
 
     .scrollbar::-webkit-scrollbar-thumb {
-        background: #081225;
+        background: #6C757D;
         border-radius: 100vh;
         /* border: 1px solid #ffffff; */
     }
@@ -24,16 +24,36 @@
 
 @layer utilities {
     .scrollbar-hidden::-webkit-scrollbar {
-        width: 1px;
+        width: 2px;
         height: 0px;
     }
 
     .scrollbar-hidden::-webkit-scrollbar-track {
         border-radius: 100vh;
-        background: #ffffff;
+        /* background: #ffffff; */
     }
 
     .scrollbar-hidden::-webkit-scrollbar-thumb {
+        background: #6C757D;
+        border-radius: 100vh;
+        /* border: 1px solid #ffffff; */
+    }
+}
+
+@layer utilities {
+    .scrollbar-null::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        display: flex;
+        opacity: 0;
+    }
+
+    .scrollbar-null::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        /* background: #ffffff; */
+    }
+
+    .scrollbar-null::-webkit-scrollbar-thumb {
         background: #081225;
         border-radius: 100vh;
         /* border: 1px solid #ffffff; */

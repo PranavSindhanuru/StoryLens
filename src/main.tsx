@@ -2,9 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import AppMobile from './AppMobile.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    {window.innerWidth > 760 ?
+      <App />
+      :
+      <AppMobile />
+    }
   </React.StrictMode>,
 )
