@@ -204,15 +204,15 @@ function AppMobile() {
                 <div className={`transition-all w-fit h-fit mt-2 bg-white rounded-lg shadow-md ${window.innerWidth > 400 ? 'scale-[0.8]' : 'scale-[0.7]'} text-sm ${currentPage === 0 ? 'ml-10' : ''}`}>
                     <div className="relative flex items-center justify-end gap-2 p-1 w-fit px-2" style={{ color: secondaryTextColor }}>
                         <div className={`absolute transition-all duration-300 rounded-lg ${currentPage === 0 ? 'left-0 w-1/3 bg-[#212529]' : currentPage === 1 ? 'left-1/3 w-1/3 bg-[#212529]' : 'left-2/3 w-1/3 bg-[#212529]'}`} style={{ height: '100%' }} />
-                        <div className={`p-1 px-2  transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 0 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(0)}>
+                        <div className={`shrink-0 p-1 px-2  transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 0 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(0)}>
                             <GiWhiteBook />
                             <div className="">Story Vault</div>
                         </div>
-                        <div className={`p-1 px-2 transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 1 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(1)}>
+                        <div className={`shrink-0 p-1 px-2 transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 1 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(1)}>
                             <BiSolidBookAdd />
                             <div className="">Add Story</div>
                         </div>
-                        <div className={`p-1 px-2 transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 2 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(2)}>
+                        <div className={`shrink-0 p-1 px-2 transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 2 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(2)}>
                             <TbListLetters />
                             <div className="">Saved Words</div>
                         </div>
