@@ -255,16 +255,15 @@ function AppMobile() {
             <div className={`${currentPage === 0 ? 'w-full h-fit' : 'w-0 h-0 opacity-0 overflow-hidden'}`}>
                 <div className={`w-full h-fit whitespace-pre-line mt-2 px-5`}>
                     <CustomText text={selectedStory?.Story} wordMeaning={wordMeaning} />
-                    <div className="h-5"></div>
+                    <div className="mt-20"></div>
                 </div>
-                <div className="h-[50px]"></div>
             </div>
 
             <div className={`relative ${currentPage === 1 ? 'w-full p-3' : 'h-0 opacity-0 overflow-hidden'}`} style={{ height: currentPage === 1 ? window.innerHeight - 150 : 0 }}>
                 {isEdit ?
-                    <textarea placeholder='Add Story' className="w-full h-full text-sm bg-white rounded-lg border border-black resize-none p-3 focus:outline-none focus:ring-0 focus:border-black overflow-y-auto scrollbar" value={inputStory} onChange={(e) => setInputStory(e.target.value)} />
+                    <textarea placeholder='Add Story' className="w-full text-sm bg-white rounded-lg border border-black resize-none p-3 focus:outline-none focus:ring-0 focus:border-black overflow-y-auto scrollbar" style={{ height: currentPage === 1 ? window.innerHeight - 150 : 0 }} value={inputStory} onChange={(e) => setInputStory(e.target.value)} />
                     :
-                    <div className={`w-full h-full bg-white rounded-lg border border-black whitespace-pre-line p-3 overflow-y-auto scrollbar`}>
+                    <div className={`w-full bg-white rounded-lg border border-black whitespace-pre-line p-3 overflow-y-auto scrollbar`} style={{ height: currentPage === 1 ? window.innerHeight - 150 : 0 }}>
                         {inputStory ?
                             <CustomText text={inputStory} wordMeaning={wordMeaning} />
                             :
