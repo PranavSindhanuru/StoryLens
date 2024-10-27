@@ -25,9 +25,6 @@ function App() {
 	const [searchWords, setSearchWords] = useState<any>('');
 	const [inputStory, setInputStory] = useState<any>('');
 	const [isEdit, setIsEdit] = useState(true);
-	const [openModal, setOpenModal] = useState(false);
-	const [modalValues, setModalValues] = useState<any>({});
-
 
 	useEffect(() => {
 		loadExcelFile();
@@ -129,6 +126,8 @@ function App() {
 	}
 
 	const GroupedWords = ({ words }: any) => {
+		const [openModal, setOpenModal] = useState(false);
+		const [modalValues, setModalValues] = useState<any>({});
 		const chunkedArray = chunkArray(words, 5); // Change 5 to the desired chunk size
 		const Cell = ({ columnIndex, rowIndex, style }: any) => (
 			<div style={style}>
@@ -157,6 +156,14 @@ function App() {
 				>
 					{Cell}
 				</Grid>
+				<Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+					<Modal.Header>{modalValues?.word}</Modal.Header>
+					<Modal.Body>
+						<div className="space-y-6 whitespace-pre-wrap">
+							{modalValues?.meaning}
+						</div>
+					</Modal.Body>
+				</Modal>
 			</div>
 		)
 	}
@@ -164,14 +171,6 @@ function App() {
 
 	return (
 		<div className="font-tahoma h-screen w-screen overflow-x-hidden overflow-y-auto scrollbar" style={{ backgroundColor: bgColor }}>
-			<Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
-				<Modal.Header>{modalValues?.word}</Modal.Header>
-				<Modal.Body>
-					<div className="space-y-6 whitespace-pre-wrap">
-						{modalValues?.meaning}
-					</div>
-				</Modal.Body>
-			</Modal>
 			<div className="w-full h-fit flex flex-col justify-center items-center pt-3 sticky top-0 z-10">
 				<div className={`transition-all w-fit h-fit mt-2 bg-white rounded-lg shadow-md text-sm`}>
 					<div className="relative flex items-center justify-center gap-2 p-1 w-fit px-2" style={{ color: secondaryTextColor }}>

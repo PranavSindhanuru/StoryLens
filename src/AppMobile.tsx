@@ -25,8 +25,6 @@ function AppMobile() {
     const [searchWords, setSearchWords] = useState<any>('');
     const [inputStory, setInputStory] = useState<any>('');
     const [isEdit, setIsEdit] = useState(true);
-    const [openModal, setOpenModal] = useState(false);
-    const [modalValues, setModalValues] = useState<any>({});
     const [openSelectStory, setOpenSelectStory] = useState(false);
 
 
@@ -130,6 +128,13 @@ function AppMobile() {
     }
 
     const GroupedWords = ({ words }: any) => {
+        const [openModal, setOpenModal] = useState(false);
+        const [modalValues, setModalValues] = useState<any>({});
+        const handleBackdropClick = (e: any) => {
+            if (e.target === e.currentTarget) {
+                setOpenModal(false);
+            }
+        };
         const chunkedArray = chunkArray(words, 2); // Change 5 to the desired chunk size
         const Cell = ({ columnIndex, rowIndex, style }: any) => (
             <div style={style}>
@@ -158,51 +163,45 @@ function AppMobile() {
                 >
                     {Cell}
                 </Grid>
+                {openModal && (
+                    <div
+                        className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center p-2"
+                        onClick={handleBackdropClick}
+                        role="presentation"
+                    >
+                        <div
+                            className="relative bg-white dark:bg-gray-700 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-hidden"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="flex items-start justify-between p-4 border-b border-gray-200 dark:border-gray-600">
+                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                                    {modalValues.word}
+                                </h3>
+                                <button
+                                    onClick={() => setOpenModal(false)}
+                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                                >
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="p-6 overflow-y-auto">
+                                <div className="space-y-6 whitespace-pre-wrap">
+                                    {modalValues.meaning}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         )
     }
 
-    const handleBackdropClick = (e: any) => {
-        if (e.target === e.currentTarget) {
-            setOpenModal(false);
-        }
-    };
-
     return (
         <div className="font-tahoma h-screen w-screen overflow-x-hidden overflow-y-auto text-sm" style={{ backgroundColor: bgColor }}>
-            {openModal && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center p-2"
-                    onClick={handleBackdropClick}
-                    role="presentation"
-                >
-                    <div
-                        className="relative bg-white dark:bg-gray-700 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-hidden"
-                        onClick={e => e.stopPropagation()}
-                    >
-                        <div className="flex items-start justify-between p-4 border-b border-gray-200 dark:border-gray-600">
-                            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                                {modalValues.word}
-                            </h3>
-                            <button
-                                onClick={() => setOpenModal(false)}
-                                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                            >
-                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div className="p-6 overflow-y-auto">
-                            <div className="space-y-6 whitespace-pre-wrap">
-                                {modalValues.meaning}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
             <div className="w-full h-fit flex flex-col justify-center items-center pt-3 sticky top-0 z-[11]">
-                <div className={`transition-all w-fit h-fit mt-2 bg-white rounded-lg shadow-md scale-[0.8] text-sm ${currentPage === 0 ? 'ml-10' : ''}`}>
+                <div className={`transition-all w-fit h-fit mt-2 bg-white rounded-lg shadow-md ${window.innerWidth > 400 ? 'scale-[0.8]' : 'scale-[0.7]'} text-sm ${currentPage === 0 ? 'ml-10' : ''}`}>
                     <div className="relative flex items-center justify-end gap-2 p-1 w-fit px-2" style={{ color: secondaryTextColor }}>
                         <div className={`absolute transition-all duration-300 rounded-lg ${currentPage === 0 ? 'left-0 w-1/3 bg-[#212529]' : currentPage === 1 ? 'left-1/3 w-1/3 bg-[#212529]' : 'left-2/3 w-1/3 bg-[#212529]'}`} style={{ height: '100%' }} />
                         <div className={`p-1 px-2  transition-all cursor-pointer relative z-10 w-[120px] ${currentPage === 0 ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center gap-2`} onClick={() => setCurrentPage(0)}>
@@ -219,7 +218,7 @@ function AppMobile() {
                         </div>
                     </div>
                 </div>
-                <div className={`transition-all ${currentPage === 1 ? 'w-fit h-fit mt-1 bg-white rounded-lg shadow-md scale-[0.8] text-sm' : 'w-0 h-0 overflow-hidden scale-y-0'}`}>
+                <div className={`transition-all ${window.innerWidth > 400 ? 'scale-[0.8]' : 'scale-[0.7]'} ${currentPage === 1 ? 'w-fit h-fit mt-1 bg-white rounded-lg shadow-md text-sm' : 'w-0 h-0 overflow-hidden scale-y-0'}`}>
                     <div className="relative flex items-center justify-center gap-2 p-1 w-fit px-2" style={{ color: secondaryTextColor }}>
                         <div className={`absolute transition-all duration-300 rounded-lg ${isEdit ? 'left-0 w-1/2 bg-[#212529]' : 'left-1/2 w-1/2 bg-[#212529]'}`} style={{ height: '100%' }} />
                         <div className={`p-1 px-2  transition-all cursor-pointer relative z-10 w-1/2 ${isEdit ? 'text-white' : 'text-black hover:scale-[1.1]'} flex items-center justify-center`} onClick={() => setIsEdit(true)}>Edit</div>
@@ -227,9 +226,9 @@ function AppMobile() {
                     </div>
                 </div>
             </div>
-            <div className={`transition-all ${currentPage === 0 ? 'w-fit h-fit ml-4' : 'w-0 h-0 overflow-hidden opacity-0'} flex justify-start items-center fixed top-0 z-[11]`}>
+            <div className={`transition-all ${currentPage === 0 ? 'w-fit h-fit' : 'w-0 h-0 overflow-hidden opacity-0'} ${window.innerWidth > 400 ? '' : 'mt-0.5'} ${window.innerWidth < 330 ? '' : ' ml-4'} flex justify-start items-center fixed top-0 z-[11]`}>
                 <div className="bg-[#212529] text-white mt-[1.35rem] ml-2 p-2 rounded-full text-center shadow-md text-xs cursor-pointer" onClick={() => setOpenSelectStory(!openSelectStory)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`${window.innerWidth > 400 ? ' w-4 h-4' : ' w-3 h-3'}`}>
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
 
@@ -258,9 +257,10 @@ function AppMobile() {
                     <CustomText text={selectedStory?.Story} wordMeaning={wordMeaning} />
                     <div className="h-5"></div>
                 </div>
+                <div className="h-[50px]"></div>
             </div>
 
-            <div className={`relative ${currentPage === 1 ? 'h-[calc(100%-100px)] w-full p-3' : 'w-0 h-0 opacity-0 overflow-hidden'}`}>
+            <div className={`relative ${currentPage === 1 ? 'h-[calc(100%-130px)] w-full p-3' : 'w-0 h-0 opacity-0 overflow-hidden'}`}>
                 {isEdit ?
                     <textarea placeholder='Add Story' className="w-full h-full text-sm bg-white rounded-lg border border-black resize-none p-3 focus:outline-none focus:ring-0 focus:border-black overflow-y-auto scrollbar" value={inputStory} onChange={(e) => setInputStory(e.target.value)} />
                     :
