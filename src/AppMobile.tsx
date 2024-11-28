@@ -9,6 +9,7 @@ import { BiSolidBookAdd } from 'react-icons/bi';
 import { IoIosSearch } from 'react-icons/io';
 import Tooltip from '@mui/material/Tooltip';
 import { FixedSizeGrid as Grid } from 'react-window';
+import axios from 'axios';
 
 function AppMobile() {
 
@@ -27,6 +28,12 @@ function AppMobile() {
     const [isEdit, setIsEdit] = useState(true);
     const [openSelectStory, setOpenSelectStory] = useState(false);
 
+
+    useEffect(() => {
+        axios.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vS44qjYSNRd-kPzGWbW1YNVuazK3PidXEnazCVev_HWiWsSjDnygrUja1B3TjhX_KlGyxRkS_AtpYQ5/pub?output=xlsx').then((res: any) => {
+            console.log(res)
+        })
+    }, [])
 
     useEffect(() => {
         loadExcelFile();

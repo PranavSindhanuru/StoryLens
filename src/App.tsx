@@ -60,7 +60,8 @@ function App() {
 
 
 	const loadExcelFile = async () => {
-		const response = await fetch(`${import.meta.env.BASE_URL}/Words Master.xlsx`);
+		// const response = await fetch(`${import.meta.env.BASE_URL}/Words Master.xlsx`);
+		const response = await fetch(`https://docs.google.com/spreadsheets/d/e/2PACX-1vS3-IhkoX1CJHZEcC0crsi3sjU_vMpwC8njYgfmp-ofUGB9Dso4Yt_bgD004iS-qBPDtl7ZP8n8HjSh/pub?output=xlsx`);
 		const blob = await response.blob();
 		const reader = new FileReader();
 		reader.onload = (e: any) => {
